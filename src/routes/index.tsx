@@ -3,6 +3,7 @@ import { RootView } from "../view/Root";
 import { HomeView } from "../view/Home";
 import { LoginView } from "../view/Login";
 import { RestaurantView } from "../view/Restaurant";
+import { AvailableFoodsView } from "../view/AvailableFoods";
 
 export const routes = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const routes = createBrowserRouter([
       {
         path: "home",
         element: <HomeView />,
+      },
+      {
+        path: "restaurant/:id",
+        element: <AvailableFoodsView />,
       },
       {
         path: "restaurant",
