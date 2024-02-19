@@ -1,16 +1,30 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { AvailablerFoodsWrapper } from "./styles";
 import { FoodCard } from "../../components/FoodCard";
+import { useEffect } from "react";
 
 export const AvailableFoodsView = () => {
   const params = useParams();
-  console.log(params);
+  const navigate = useNavigate();
+
+  function onBackPage() {
+    navigate(-1);
+  }
+
+  async function fetchRestaurant(restaurantId: string) {
+    // fazer request aqui
+    await Promise.resolve(restaurantId);
+  }
+
+  useEffect(() => {
+    fetchRestaurant(params.id as string);
+  }, [params]);
 
   return (
     <AvailablerFoodsWrapper>
       <header className="search-container">
-        <button className="search-button">
+        <button onClick={onBackPage} className="search-button">
           <FaArrowLeft />
           <span>Voltar</span>
         </button>

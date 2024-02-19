@@ -26,14 +26,14 @@ export const Sidebar = () => {
         Maninho
       </h1>
       <ButtonPage
-        selected={currentPage === "/home"}
+        selected={currentPage.includes("/home")}
         onClick={() => onSelectPage("/home")}
       >
         <IoMdHome />
         <span className="name">Inicio</span>
       </ButtonPage>
       <ButtonPage
-        selected={currentPage === "/restaurant"}
+        selected={currentPage.includes("/restaurant")}
         onClick={() => onSelectPage("/restaurant")}
       >
         <IoMdRestaurant />
