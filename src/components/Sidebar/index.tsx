@@ -1,4 +1,6 @@
 import { IoMdHome, IoMdRestaurant } from "react-icons/io";
+import { IoFastFoodSharp } from "react-icons/io5";
+
 import { ButtonPage, SidebarWrapper } from "./styles";
 import { Logout } from "../Logout";
 import { useEffect, useState } from "react";
@@ -38,6 +40,13 @@ export const Sidebar = () => {
       >
         <IoMdRestaurant />
         <span className="name">Restaurantes</span>
+      </ButtonPage>
+      <ButtonPage
+        selected={currentPage.includes("/foods")}
+        onClick={() => onSelectPage("/foods")}
+      >
+        <IoFastFoodSharp />
+        <span className="name">Comidas</span>
       </ButtonPage>
       <Logout />
     </SidebarWrapper>

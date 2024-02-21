@@ -1,21 +1,24 @@
-import { CardWrapper } from "./styles";
+import { RestaurantCardWrapper } from "./styles";
 
-interface CardProps {
+interface RestaurantCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  onClick(): void;
+  onClick?: () => void;
 }
 
-export const Card = ({ description, imageUrl, title, onClick }: CardProps) => {
+export const RestaurantCard = ({ description, imageUrl, title, onClick }: RestaurantCardProps) => {
   const backgroundImage = `url("${imageUrl}")`;
   return (
-    <CardWrapper onClick={onClick}>
+    <RestaurantCardWrapper
+      onClick={onClick}
+      style={{ cursor: onClick ? "pointer" : "default" }}
+    >
       <div className="restaurant-info">
         <div className="title">{title}</div>
         <div className="description">{description}</div>
       </div>
       <div className="image" style={{ backgroundImage }}></div>
-    </CardWrapper>
+    </RestaurantCardWrapper>
   );
 };

@@ -55,8 +55,28 @@ export const LoginWrapper = styled.div`
         border: none;
         border-radius: 4px;
         color: white;
+        font-weight: 600;
         background-color: var(--primary);
         cursor: pointer;
+      }
+      button.no-account {
+        background-color: transparent;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+        margin-left: auto;
+        
+        span {
+          color: white;
+          text-align: end;
+          font-size: 12px;
+        }
+
+        &:hover {
+          span {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

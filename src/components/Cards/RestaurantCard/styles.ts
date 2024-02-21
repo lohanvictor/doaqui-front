@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-export const CardWrapper = styled.button`
+export const RestaurantCardWrapper = styled.button`
   width: 100%;
   padding: 8px;
   border-radius: 8px;
-  cursor: pointer;
   background-color: var(--primary-dark);
 
   display: flex;

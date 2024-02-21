@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { AvailablerFoodsWrapper } from "./styles";
-import { FoodCard } from "../../components/FoodCard";
 import { useEffect } from "react";
+import { RestaurantFoodCard } from "../../components/Cards/RestaurantFoodCard";
 
 export const AvailableFoodsView = () => {
   const params = useParams();
@@ -39,16 +39,18 @@ export const AvailableFoodsView = () => {
 
         <div className="available-foods">
           <h2 className="title">Alimentos disponíveis</h2>
-          <FoodCard
+          <RestaurantFoodCard
             description="Filé de peito de frango grelhado, aproximadamente 300g."
-            food="Peito de Frango Grelhado"
+            title="Peito de Frango Grelhado"
+            onClick={() => null}
+            imageUrl=""
+          />
+          <RestaurantFoodCard
+            title="Spaguetti Integral à Bolonhesa"
+            description="Massa integral com temperos naturais, aproximadamente 300g."
+            imageUrl=""
             onClick={() => null}
             selected
-          />
-          <FoodCard
-            food="Spaguetti Integral à Bolonhesa"
-            description="Massa integral com temperos naturais, aproximadamente 300g."
-            onClick={() => null}
           />
         </div>
       </div>
