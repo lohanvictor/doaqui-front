@@ -9,7 +9,7 @@ export const WhoAreYou = ({ onSelectType }: WhoAreYouProps) => {
     <WhoAreYouWrapper>
       <span>Quero ser um:</span>
       <button onClick={() => onSelectType("person")}>Doador</button>
-      <button onClick={() => onSelectType("institution")}>Beneficiário</button>
+      <button onClick={() => onSelectType("beneficiary")}>Beneficiário</button>
     </WhoAreYouWrapper>
   );
 };

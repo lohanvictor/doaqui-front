@@ -5,7 +5,7 @@ export const CreateInstutitionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 420px;
-  padding: 32px 32px;
+  padding: 16px 32px 32px;
   border-radius: 16px;
   gap: 16px;
   background-color: var(--secondary-light);
@@ -14,6 +14,7 @@ export const CreateInstutitionWrapper = styled.div`
     color: white;
     font-size: 24px;
     font-weight: 600;
+    text-align: center;
   }
 
   input {

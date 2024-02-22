@@ -2,7 +2,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { RegisterFoodWrapper } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useRef } from "react";
-import { Food } from "../../services/Foods.service";
+import { Food, FoodService } from "../../services/Foods.service";
 
 export const RegisterFoodView = () => {
   const navigate = useNavigate();
@@ -27,10 +27,14 @@ export const RegisterFoodView = () => {
 
   async function onRegister() {
     const formData = new FormData();
-    for (const [key, value] of Object.entries(form.current)) {
-      formData.append(key, value);
-    }
-    console.log([...formData.entries()]);
+    formData.append("description", form.current.description);
+    formData.append("name", form.current.name);
+    formData.append("image", form.current.image!);
+    formData.append("price", form.current.price.toString());
+    formData.append("status_sale", String(form.current.status_sale));
+    formData.append("validity_str", form.current.validity_str);
+    await FoodService.addFood(formData);
+    onBack()
   }
 
   return (

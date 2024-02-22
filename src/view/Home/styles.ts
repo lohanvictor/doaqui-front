@@ -41,6 +41,7 @@ export const HomeWrapper = styled.div`
       margin-bottom: 16px;
       color: #fff;
       font-weight: 100;
+      text-transform: capitalize;
     }
     h2 {
       color: #fff;

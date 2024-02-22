@@ -39,7 +39,7 @@ export const FoodCardWrapper = styled.button`
     }
 
     button.toggle-sale {
-      width: 80px;
+      width: 90px;
       color: white;
       font-weight: 600;
       font-size: 12px;

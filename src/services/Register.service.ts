@@ -1,3 +1,5 @@
+import { apiUserService } from "../lib/api";
+
 export interface Address {
   street: string;
   number: string;
@@ -16,17 +18,37 @@ export interface Restaurant {
 }
 
 export interface Person {
-  user_type: "donor";
+  user_type: "donor" | "beneficiary";
   fullname: string;
   documentNumber: string;
   phone: string;
   email: string;
   password: string;
-  restaurant_data: Restaurant;
+  address?: Address;
+  restaurant_data?: Restaurant;
+  _id?: string;
+}
+
+export interface CreateBeneficiaryResponse {
+  beneficiary_id: string;
+  message: string;
 }
 
 export class RegisterService {
-  static register(person: Person) {
-    console.log(person);
+  static async registerDonor(body: Person) {
+    const response = await apiUserService.post("/donors/", body);
+    return response.data as Person;
+  }
+  static async registerBeneficiary(body: Person) {
+    const response = await apiUserService.post<CreateBeneficiaryResponse>(
+      "/beneficiaries/",
+      body
+    );
+    return response.data;
+  }
+
+  static async getBeneficiary(id: string) {
+    const response = await apiUserService.get<Person>(`/beneficiaries/${id}`);
+    return response.data;
   }
 }

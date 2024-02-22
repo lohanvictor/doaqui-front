@@ -7,6 +7,7 @@ import { AvailableFoodsView } from "../view/AvailableFoods";
 import { RegisterView } from "../view/Register";
 import { FoodsView } from "../view/Foods";
 import { RegisterFoodView } from "../view/RegisterFood";
+import { CartView } from "../view/Cart";
 
 export const routes = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const routes = createBrowserRouter([
       {
         path: "foods/register",
         element: <RegisterFoodView />,
+      },
+      {
+        path: "cart",
+        element: <CartView />,
       },
     ],
   },

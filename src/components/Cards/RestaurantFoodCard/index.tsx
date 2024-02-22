@@ -19,6 +19,7 @@ export const RestaurantFoodCard = ({
 
   return (
     <RestaurantFoodCardWrapper
+      onClick={onClick}
       selected={Boolean(selected)}
       style={{ cursor: onClick ? "pointer" : "default" }}
     >

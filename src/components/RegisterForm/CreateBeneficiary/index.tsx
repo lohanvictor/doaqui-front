@@ -1,40 +1,46 @@
 import { useRef, useState } from "react";
 import { Person, RegisterService } from "../../../services/Register.service";
-import { CreatePersonWrapper } from "./styles";
+import { CreateInstutitionWrapper } from "./styles";
+import { useUser } from "../../../context/useUser";
+import { useNavigate } from "react-router-dom";
+import { CartService } from "../../../services/Cart.service";
+import { useCart } from "../../../context/useCart";
 
-export const CreatePerson = () => {
-  const [steps, setSteps] = useState<"person" | "restaurant" | "address">(
-    "person"
-  );
+export const CreateBeneficiary = () => {
+  const [steps, setSteps] = useState<"person" | "address">("person");
   const form = useRef<Person>({
     fullname: "",
     email: "",
     documentNumber: "",
     password: "",
     phone: "",
-    user_type: "donor",
-    restaurant_data: {
-      address: {
-        city: "",
-        district: "",
-        number: "",
-        state: "",
-        street: "",
-        zip_code: "",
-      },
-      cnpj: "",
-      delivers: false,
-      name: "",
-      phone: "",
+    user_type: "beneficiary",
+    address: {
+      city: "",
+      district: "",
+      number: "",
+      state: "",
+      street: "",
+      zip_code: "",
     },
   });
 
-  function onCreate() {
-    RegisterService.register(form.current);
-  }
+  const { updatePerson } = useUser();
+  const navigate = useNavigate();
+  const { setCartId } = useCart();
 
+  async function onCreate() {
+    const { beneficiary_id } = await RegisterService.registerBeneficiary(
+      form.current
+    );
+    const personCreated = await RegisterService.getBeneficiary(beneficiary_id);
+    const cart = await CartService.initCart(personCreated._id!);
+    setCartId(cart.id);
+    updatePerson(personCreated);
+    navigate("/home");
+  }
   return (
-    <CreatePersonWrapper>
+    <CreateInstutitionWrapper>
       {steps === "person" ? (
         <>
           <span>Cadastrar dados pessoais</span>
@@ -66,50 +72,17 @@ export const CreatePerson = () => {
               (form.current.password = (target as HTMLInputElement).value)
             }
           />
-          <button onClick={() => setSteps("restaurant")}>Próximo passo</button>
-        </>
-      ) : null}
-      {steps === "restaurant" ? (
-        <>
-          <span>Cadastrar dados do restaurante</span>
-          <input
-            placeholder="Nome do restaurante"
-            type="text"
-            onInput={({ target }) =>
-              (form.current.restaurant_data.name = (
-                target as HTMLInputElement
-              ).value)
-            }
-          />
-          <input
-            placeholder="Telefone"
-            type="text"
-            onInput={({ target }) =>
-              (form.current.restaurant_data.phone = (
-                target as HTMLInputElement
-              ).value)
-            }
-          />
-          <input
-            placeholder="CNPJ"
-            type="text"
-            onInput={({ target }) =>
-              (form.current.restaurant_data.cnpj = (
-                target as HTMLInputElement
-              ).value)
-            }
-          />
           <button onClick={() => setSteps("address")}>Próximo passo</button>
         </>
       ) : null}
       {steps === "address" ? (
         <>
-          <span>Cadastrar dados do restaurante</span>
+          <span>Cadastrar endereço</span>
           <input
             placeholder="CEP"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.zip_code = (
+              (form.current.address!.zip_code = (
                 target as HTMLInputElement
               ).value)
             }
@@ -118,25 +91,21 @@ export const CreatePerson = () => {
             placeholder="Estado"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.state = (
-                target as HTMLInputElement
-              ).value)
+              (form.current.address!.state = (target as HTMLInputElement).value)
             }
           />
           <input
             placeholder="Cidade"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.city = (
-                target as HTMLInputElement
-              ).value)
+              (form.current.address!.city = (target as HTMLInputElement).value)
             }
           />
           <input
             placeholder="Rua"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.street = (
+              (form.current.address!.street = (
                 target as HTMLInputElement
               ).value)
             }
@@ -145,7 +114,7 @@ export const CreatePerson = () => {
             placeholder="Bairro"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.district = (
+              (form.current.address!.district = (
                 target as HTMLInputElement
               ).value)
             }
@@ -154,7 +123,7 @@ export const CreatePerson = () => {
             placeholder="Numero"
             type="text"
             onInput={({ target }) =>
-              (form.current.restaurant_data.address.number = (
+              (form.current.address!.number = (
                 target as HTMLInputElement
               ).value)
             }
@@ -162,6 +131,6 @@ export const CreatePerson = () => {
           <button onClick={onCreate}>Concluir cadastro</button>
         </>
       ) : null}
-    </CreatePersonWrapper>
+    </CreateInstutitionWrapper>
   );
 };

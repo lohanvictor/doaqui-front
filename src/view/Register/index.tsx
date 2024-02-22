@@ -3,10 +3,10 @@ import { FaArrowLeft } from "react-icons/fa";
 import { RegisterWrapper } from "./styles";
 import { useState } from "react";
 import { WhoAreYou } from "../../components/RegisterForm/WhoAreYou";
-import { CreateInstitution } from "../../components/RegisterForm/CreateInstitution";
-import { CreatePerson } from "../../components/RegisterForm/CreatePerson";
+import { CreateBeneficiary } from "../../components/RegisterForm/CreateBeneficiary";
+import { CreateDonor } from "../../components/RegisterForm/CreateDonor";
 
-type StepsTypes = "who-are-you" | "create-institution" | "create-person";
+type StepsTypes = "who-are-you" | "create-beneficiary" | "create-donor";
 
 export const RegisterView = () => {
   const [steps, setSteps] = useState<StepsTypes>("who-are-you");
@@ -14,9 +14,9 @@ export const RegisterView = () => {
 
   function onSelectType(type: string) {
     if (type === "person") {
-      setSteps("create-person");
-    } else if (type === "institution") {
-      setSteps("create-institution");
+      setSteps("create-donor");
+    } else if (type === "beneficiary") {
+      setSteps("create-beneficiary");
     }
   }
   function onBack() {
@@ -38,8 +38,8 @@ export const RegisterView = () => {
           {steps === "who-are-you" ? (
             <WhoAreYou onSelectType={onSelectType} />
           ) : null}
-          {steps === "create-institution" ? <CreateInstitution /> : null}
-          {steps === "create-person" ? <CreatePerson /> : null}
+          {steps === "create-beneficiary" ? <CreateBeneficiary /> : null}
+          {steps === "create-donor" ? <CreateDonor /> : null}
         </div>
       </div>
     </RegisterWrapper>
